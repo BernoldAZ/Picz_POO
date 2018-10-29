@@ -16,7 +16,7 @@ public class PostRoom implements iPostable {
 
     String Comment;
 
-    Image Photo; //Hay que convertirlo a un tipo de dato primitivo
+    //Image Photo; //Hay que convertirlo a un tipo de dato primitivo
 
     public void savePost() {
 
