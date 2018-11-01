@@ -6,4 +6,5 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="open_camera">open_camera</string>
+    <string name="open_gallery">open_gallery</string>
 </resources>

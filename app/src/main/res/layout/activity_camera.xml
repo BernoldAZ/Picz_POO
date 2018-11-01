@@ -24,6 +24,6 @@
         android:layout_width="match_parent"
         android:background="@android:color/holo_red_dark"
         android:textColor="@android:color/white"
-        android:text="@string/open_camera"
+        android:text="@string/open_gallery"
         />
 </android.support.constraint.ConstraintLayout>

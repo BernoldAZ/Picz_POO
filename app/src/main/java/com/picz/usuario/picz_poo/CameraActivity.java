@@ -2,6 +2,7 @@ package com.picz.usuario.picz_poo;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +12,8 @@ import android.widget.ImageView;
 
 
 public class CameraActivity extends AppCompatActivity {
+
+    private static final int PICK_IMAGE = 100;
 
     ImageView imageView;
 
@@ -22,20 +25,33 @@ public class CameraActivity extends AppCompatActivity {
         Button btnCamera = (Button)findViewById(R.id.btnCamera);
         imageView = (ImageView)findViewById(R.id.imageView);
 
+        Bundle parametros = this.getIntent().getExtras();
+        if(parametros !=null){
+            Bitmap photo = parametros.getParcelable("Photo");
+            imageView.setImageBitmap(photo);
+        }
+
+
         btnCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent,0);
+                openGallery();
             }
         });
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        Bitmap bitmap = (Bitmap)data.getExtras().get("data");
-        imageView.setImageBitmap(bitmap);
+        if(resultCode == RESULT_OK && requestCode == PICK_IMAGE){
+            Bitmap photo = (Bitmap)data.getExtras().get("data");
+
+            imageView.setImageBitmap(photo);
+        }
+        else finish();
     }
 
+    private void openGallery(){
+        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        startActivityForResult(gallery, PICK_IMAGE);
+    }
 }
