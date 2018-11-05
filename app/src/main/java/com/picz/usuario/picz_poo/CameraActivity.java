@@ -10,6 +10,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import Filters.BlackWhiteFilter;
+import Filters.iFilterable;
+
 
 public class CameraActivity extends AppCompatActivity {
 
@@ -45,6 +48,8 @@ public class CameraActivity extends AppCompatActivity {
         if(resultCode == RESULT_OK && requestCode == PICK_IMAGE){
             Bitmap photo = (Bitmap)data.getExtras().get("data");
 
+            iFilterable filtro = new BlackWhiteFilter();
+            filtro.makeFilter(photo);
             imageView.setImageBitmap(photo);
         }
         else finish();
