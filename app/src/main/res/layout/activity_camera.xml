@@ -8,14 +8,15 @@
     tools:context=".CameraActivity">
 
 
-
-
     <ImageView
         android:id="@+id/imageView"
-        android:layout_weight="9"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:contentDescription="TODO" />
+        android:layout_weight="9"
+        android:contentDescription="TODO"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="0dp" />
 
     <Button
         android:id="@+id/btnCamera"
