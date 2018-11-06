@@ -36,9 +36,9 @@ public class CameraActivity extends AppCompatActivity {
             Bitmap photo = parametros.getParcelable("Photo");
             Log.w("mitag", "empiezo");
             iFilterable filtro = new BlackWhiteFilter();
-            filtro.makeFilter(photo);
+            Bitmap Aplicado = filtro.makeFilter(photo);
             Log.w("mitag", "termine");
-            imageView.setImageBitmap(photo);
+            imageView.setImageBitmap(Aplicado);
         }
 
 

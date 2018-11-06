@@ -1,13 +1,11 @@
 package Filters;
 
 import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.util.Log;
 
 
 public class BlackWhiteFilter implements iFilterable {
 
-    public void makeFilter(Bitmap photo){
+    public Bitmap makeFilter(Bitmap photo){
         photo = photo.copy( Bitmap.Config.ARGB_8888 , true);
         int vertical = photo.getHeight();
         int horizontal = photo.getWidth();
@@ -18,6 +16,7 @@ public class BlackWhiteFilter implements iFilterable {
             for (int contadorX = 0; contadorX < horizontal; contadorX++) {
 
             //mi metodo
+                
                 pixel = photo.getPixel(contadorX, contadorY);
                 azul = pixel & 0x000000FF;
                 verde = pixel & 0x0000FF00 >> 8;
@@ -40,5 +39,7 @@ public class BlackWhiteFilter implements iFilterable {
                 photo.setPixel(contadorX, contadorY, gray);*/
 
             }
+            return photo;
+
     }
 }
