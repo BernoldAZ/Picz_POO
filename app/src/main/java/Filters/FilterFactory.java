@@ -11,6 +11,9 @@ public class FilterFactory {
         //Aqui se agregarian todos los filtros
         iFilterable BlackWhite = new BlackWhiteFilter();
         Allfilters.add(BlackWhite);
+
+        iFilterable Gaussian = new GaussianFilter();
+        Allfilters.add(Gaussian);
     }
 
     public iFilterable getFilter(int posFilter){
