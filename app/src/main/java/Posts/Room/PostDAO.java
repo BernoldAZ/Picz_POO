@@ -11,6 +11,7 @@ import java.util.List;
 @Dao
 public interface PostDAO {
 
+
     @Insert
     public void insert(PostRoom pPost);
 

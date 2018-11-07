@@ -1,5 +1,6 @@
 package com.picz.usuario.picz_poo;
 
+import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -11,8 +12,26 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity {
+import Posts.Room.PostDAO;
+import Posts.Room.PostDataBase;
+import Posts.Room.PostRoom;
 
+public class MainActivity extends AppCompatActivity {
+    PostDataBase db = Room.databaseBuilder(getApplicationContext(),PostDataBase.class, "database-name").build();
+
+    private static PostRoom addUser(final PostDataBase db, PostRoom post) {
+        db.PostDAO().insert(post);
+        return post;
+    }
+    public Bitmap getReportPicture(long reportId) {
+        String picturePath = getReportPicturePath(reportId);
+        if (picturePath == null || picturePath.length() == 0)
+            return (null);
+
+        Bitmap reportPicture = BitmapFactory.decodeFile(picturePath);
+
+        return (reportPicture);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
