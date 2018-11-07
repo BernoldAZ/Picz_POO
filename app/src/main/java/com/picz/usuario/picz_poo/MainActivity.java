@@ -12,17 +12,18 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import Posts.Room.PostDAO;
+import java.util.List;
+
 import Posts.Room.PostDataBase;
 import Posts.Room.PostRoom;
 
 public class MainActivity extends AppCompatActivity {
     PostDataBase db = Room.databaseBuilder(getApplicationContext(),PostDataBase.class, "database-name").build();
 
-    private static PostRoom addUser(final PostDataBase db, PostRoom post) {
+    private static PostRoom addDatabase(final PostDataBase db, PostRoom post) {
         db.PostDAO().insert(post);
         return post;
-    }
+    }/*
     public Bitmap getReportPicture(long reportId) {
         String picturePath = getReportPicturePath(reportId);
         if (picturePath == null || picturePath.length() == 0)
@@ -31,13 +32,26 @@ public class MainActivity extends AppCompatActivity {
         Bitmap reportPicture = BitmapFactory.decodeFile(picturePath);
 
         return (reportPicture);
+    }*/
+    private static void agregar(PostDataBase db) {
+
+        PostRoom post = new PostRoom();
+        //post.insertar(imagen);
+        post.insertarComentario("Omae wa moe shindeiru");
+        addDatabase(db, post);
     }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        List<PostRoom> posts = db.PostDAO().getPosts();
+        for(PostRoom post: posts){
+            Log.w("mitag","1");
+        }
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
