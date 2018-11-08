@@ -13,6 +13,7 @@ import android.util.Log;
 
 import Filters.BlackWhiteFilter;
 import Filters.GaussianFilter;
+import Filters.SharpFilter;
 import Filters.iFilterable;
 
 
@@ -36,7 +37,7 @@ public class CameraActivity extends AppCompatActivity {
             toast1.show();
             Bitmap photo = parametros.getParcelable("Photo");
             Log.w("mitag", "empiezo");
-            iFilterable filtro = new GaussianFilter();
+            iFilterable filtro = new BlackWhiteFilter();
             Bitmap Aplicado = filtro.makeFilter(photo);
             Log.w("mitag", "termine");
             imageView.setImageBitmap(Aplicado);

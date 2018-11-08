@@ -2,7 +2,7 @@ package Filters;
 
 import android.graphics.Bitmap;
 
-public class GaussianFilter implements iFilterable{
+public class MyFilter implements iFilterable {
 
 
     public Bitmap makeFilter(Bitmap photo) {
@@ -28,6 +28,7 @@ public class GaussianFilter implements iFilterable{
                     pos2++;
                 }
 
+
                 int newPixel = convolution(photoCompare, kernel);
 
                 photoReturn.setPixel(contadorX,contadorY, newPixel);
@@ -46,7 +47,9 @@ public class GaussianFilter implements iFilterable{
 
         for (int fila = 0 ; fila < 3 ; fila++){ //Le asigna un resultado de aplicar la formula a cada posición de la matriz
             for (int columna = 0; columna < 3 ; columna++){
-                double valorActual =  Math.exp( -  (Math.pow((fila-1),2) + Math.pow((columna-1),2)) /(2 * Math.pow(sigma,2) ) );
+                double valorActual =   (-1 / (Math.PI * Math.pow(sigma,4)) )*
+                        (1 - (Math.pow((fila-1),2) + Math.pow((columna-1),2)) /(2 * Math.pow(sigma,2) ) )*
+                        Math.exp( -  (Math.pow((fila-1),2) + Math.pow((columna-1),2)) /(2 * Math.pow(sigma,2) ) ); //Esto seria lo que cambia
                 kernel[fila][columna] = valorActual;
                 sumaKernel = sumaKernel + valorActual;
             }

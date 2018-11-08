@@ -14,6 +14,9 @@ public class FilterFactory {
 
         iFilterable Gaussian = new GaussianFilter();
         Allfilters.add(Gaussian);
+
+        iFilterable Sharp = new SharpFilter();
+        Allfilters.add(Sharp);
     }
 
     public iFilterable getFilter(int posFilter){
