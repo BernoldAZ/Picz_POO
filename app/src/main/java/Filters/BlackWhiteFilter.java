@@ -27,7 +27,7 @@ public class BlackWhiteFilter implements iFilterable {
                 azul = suma + (int)((azul - suma) * intensidad);
                 gris = ((pixel & 0xFF000000) | (rojo << 16) | (verde << 8)) | azul;
                 //Log.w("mitag","1");
-                photo.setPixel(contadorX, contadorY, gris);
+                photo.setPixel(contadorX, contadorY, pixel*-1);
                 //Log.w("mitag","1");
 
                 //metodo original

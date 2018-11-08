@@ -20,6 +20,8 @@ import Posts.Room.PostRoom;
 public class MainActivity extends AppCompatActivity {
     PostDataBase db = Room.databaseBuilder(getApplicationContext(),PostDataBase.class, "database-name").build();
 
+    private static final int PICK_IMAGE = 100;
+
     private static PostRoom addDatabase(final PostDataBase db, PostRoom post) {
         db.PostDAO().insert(post);
         return post;
@@ -50,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         List<PostRoom> posts = db.PostDAO().getPosts();
         for(PostRoom post: posts){
-            Log.w("mitag","1");
+            //Log.w("mitag","1");
         }
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -59,6 +61,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(intent,0);
+            }
+        });
+
+        FloatingActionButton gallery = (FloatingActionButton) findViewById(R.id.gallery);
+        gallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openGallery();
             }
         });
     }
@@ -91,9 +101,16 @@ public class MainActivity extends AppCompatActivity {
         Bitmap bitmap = (Bitmap)data.getExtras().get("data");
 
 
+
+
         Intent cameraActivity = new Intent(getApplicationContext(), CameraActivity.class);
         cameraActivity.putExtra("Photo", bitmap);
         startActivity(cameraActivity);
+    }
+
+    private void openGallery(){
+        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        startActivityForResult(gallery, PICK_IMAGE);
     }
 
 

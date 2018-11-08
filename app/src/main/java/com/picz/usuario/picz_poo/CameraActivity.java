@@ -19,8 +19,6 @@ import Filters.iFilterable;
 
 public class CameraActivity extends AppCompatActivity {
 
-    private static final int PICK_IMAGE = 100;
-
     ImageView imageView;
 
     @Override
@@ -47,22 +45,14 @@ public class CameraActivity extends AppCompatActivity {
         btnCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openGallery();
             }
         });
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(resultCode == RESULT_OK && requestCode == PICK_IMAGE){
-            Bitmap photo = (Bitmap)data.getExtras().get("data");
-            imageView.setImageBitmap(photo);
-        }
-        else finish();
+
     }
 
-    private void openGallery(){
-        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-        startActivityForResult(gallery, PICK_IMAGE);
-    }
+
 }
