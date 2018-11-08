@@ -8,7 +8,7 @@ import java.util.Date;
 public interface iPostable {
     Date fecha = null;
     String Comment = null;
-    Byte[] Photo = null;
+    Image Photo = null;
 
     void savePost();
 }

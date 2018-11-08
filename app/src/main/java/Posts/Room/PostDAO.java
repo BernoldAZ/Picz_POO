@@ -11,7 +11,6 @@ import java.util.List;
 @Dao
 public interface PostDAO {
 
-
     @Insert
     public void insert(PostRoom pPost);
 
@@ -22,5 +21,5 @@ public interface PostDAO {
     public void delete(PostRoom pPost);
 
     @Query( "SELECT * FROM Post")
-    public List<PostRoom> getPosts();
+    public List<PostRoom> getContacts();
 }
