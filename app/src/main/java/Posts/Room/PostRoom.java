@@ -2,26 +2,24 @@ package Posts.Room;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
-import android.graphics.Bitmap;
-import android.media.Image;
 import android.support.annotation.NonNull;
 
-import java.util.Date;
-
-import Posts.iPostable;
-
 @Entity (tableName = "Post")
-public class PostRoom implements iPostable {
+public class PostRoom {
     @NonNull
     @PrimaryKey
     String name;
 
     String Comment;
 
+    Long date;
+
+    //Byte[] Photo;
+
     public PostRoom(@NonNull String name) {
         this.name = name;
     }
-//Byte[] Photo; //Hay que convertirlo a un tipo de dato primitivo
+ //Hay que convertirlo a un tipo de dato primitivo
 
     /*@NonNull
     public Date getFecha() {
@@ -47,7 +45,6 @@ public class PostRoom implements iPostable {
         return Comment;
     }
 
-    @Override
     public void savePost(PostDataBase db, PostRoom post) {
         db.PostDAO().insert(post);
     }
