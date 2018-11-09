@@ -17,6 +17,9 @@ public class FilterFactory {
 
         iFilterable Sharp = new SharpFilter();
         Allfilters.add(Sharp);
+
+        iFilterable MyFilter = new MyFilter();
+        Allfilters.add(MyFilter);
     }
 
     public iFilterable getFilter(int posFilter){

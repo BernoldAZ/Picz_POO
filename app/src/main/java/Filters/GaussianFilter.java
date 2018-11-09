@@ -29,7 +29,7 @@ public class GaussianFilter implements iFilterable{
                 }
 
                 int newPixel = convolution(photoCompare, kernel);
-
+                //newPixel = obtenerPixel(newPixel);
                 photoReturn.setPixel(contadorX,contadorY, newPixel);
 
             }
@@ -70,5 +70,16 @@ public class GaussianFilter implements iFilterable{
             }
         }
         return (int) result;
+    }
+
+    private int obtenerPixel(int pixel){
+        int azul = pixel & 0x000000FF;
+        int verde = pixel & 0x0000FF00 >> 8;
+        int rojo = pixel & 0x00FF0000 >> 32;
+        int alfa = pixel & 0xFF000000 >> 128;
+
+        int cambiada = (alfa << 128 | (rojo << 32) | (verde << 8)) | azul;
+
+        return cambiada;
     }
 }

@@ -11,7 +11,7 @@ public class SharpFilter implements iFilterable {
         int vertical = photo.getHeight();
         int horizontal = photo.getWidth();
 
-        double[][] kernel = crearKernel(0.15); //Aqui se declara el valor del sigma
+        double[][] kernel = crearKernel(0.19); //Aqui se declara el valor del sigma
 
         for (int contadorY = 1; contadorY < vertical-1; contadorY++){ //Se usa 1 para no utilizar los bordes
             for (int contadorX = 1; contadorX < horizontal-1; contadorX++) {
