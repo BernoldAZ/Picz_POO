@@ -9,15 +9,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
-import android.util.Log;
 
-import Filters.BlackWhiteFilter;
 import Filters.FilterFactory;
-import Filters.GaussianFilter;
-import Filters.MyFilter;
-import Filters.SharpFilter;
 import Filters.iFilterable;
-
 
 public class CameraActivity extends AppCompatActivity {
 
@@ -36,8 +30,6 @@ public class CameraActivity extends AppCompatActivity {
 
         Bundle parametros = this.getIntent().getExtras();
         if(parametros !=null){
-            Toast toast1 = Toast.makeText(getApplicationContext(),"aplicando filtro", Toast.LENGTH_SHORT);
-            toast1.show();
             Bitmap photo = parametros.getParcelable("Photo");
             imageView.setImageBitmap(photo);
         }
@@ -85,11 +77,9 @@ public class CameraActivity extends AppCompatActivity {
             Toast toast1 = Toast.makeText(getApplicationContext(),"aplicando filtro", Toast.LENGTH_SHORT);
             toast1.show();
             Bitmap photo = parametros.getParcelable("Photo");
-            Log.w("mitag", "empiezo");
             FilterFactory factory = new FilterFactory();
             iFilterable filtro = factory.getFilter(posFilter);
             Bitmap Aplicado = filtro.makeFilter(photo);
-            Log.w("mitag", "termine");
             imageView.setImageBitmap(Aplicado);
         }
 
