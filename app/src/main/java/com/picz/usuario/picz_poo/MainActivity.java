@@ -8,6 +8,7 @@ import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,32 +19,18 @@ import Posts.Room.PostDataBase;
 import Posts.Room.PostRoom;
 
 public class MainActivity extends AppCompatActivity {
-    PostDataBase db = Room.databaseBuilder(getApplicationContext(),PostDataBase.class, "database-name").build();
 
     private static final int PICK_IMAGE = 100;
-
-    private static PostRoom addDatabase(final PostDataBase db, PostRoom post) {
-        db.PostDAO().insert(post);
-        return post;
-    }/*
-    public Bitmap getReportPicture(long reportId) {
-        String picturePath = getReportPicturePath(reportId);
-        if (picturePath == null || picturePath.length() == 0)
-            return (null);
-
-        Bitmap reportPicture = BitmapFactory.decodeFile(picturePath);
-
-        return (reportPicture);
-    }*/
-    private static void agregar(PostDataBase db) {
-
-        PostRoom post = new PostRoom();
-        //post.insertar(imagen);
-        post.insertarComentario("Omae wa moe shindeiru");
-        addDatabase(db, post);
-    }
-
-
+    public PostDataBase db;
+    //Listview x;
+   /*
+    private static final String DATABASE_NAME = “movies_db”;
+    private MovieDatabase movieDatabase;
+    movieDatabase = Room.databaseBuilder(getApplicationContext(),
+    MovieDatabase.class, DATABASE_NAME)
+            .fallbackToDesctructiveMigration()
+ .build();
+*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +41,20 @@ public class MainActivity extends AppCompatActivity {
 
         List<PostRoom> posts = db.PostDAO().getPosts();
 
-
+        db = db.getAppDatabase(getApplicationContext());
+        PostRoom dan = null;
+        dan.setName("putita");
+        db.PostDAO().insert(dan);
+        Log.w("mitag","1");
+       /* try {
+            List<PostRoom> posts = db.PostDAO().getPosts();
+            for (PostRoom post : posts) {
+                Log.v("mitag", post.getComment());
+            }
+        }catch(Exception e){
+            //pass
+            Log.v("mitag", "1");
+        }*/
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

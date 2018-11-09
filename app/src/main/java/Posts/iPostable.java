@@ -5,10 +5,14 @@ import android.media.Image;
 
 import java.util.Date;
 
-public interface iPostable {
-    Date fecha = null;
-    String Comment = null;
-    Byte[] Photo = null;
+import Posts.Room.PostDataBase;
+import Posts.Room.PostRoom;
 
-    void savePost();
+public interface iPostable {
+
+     void savePost(PostDataBase db, PostRoom post);
+     // {
+      //  db.PostDAO().insert(post);
+        // return post;
+
 }
