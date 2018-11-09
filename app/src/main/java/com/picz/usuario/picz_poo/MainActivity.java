@@ -30,7 +30,17 @@ public class MainActivity extends AppCompatActivity {
     MovieDatabase.class, DATABASE_NAME)
             .fallbackToDesctructiveMigration()
  .build();
-*/
+*//*
+   new Thread(new Runnable() {
+        @Override
+        public void run() {
+            Movies movie =new Movies();
+            movie.setMovieId( “2”);
+            movie.setMovieName(“The Prestige”);
+            movieDatabase.daoAccess () . insertOnlySingleMovie (movie);
+        }
+    }) .start();*/
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,15 +48,9 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
-        List<PostRoom> posts = db.PostDAO().getPosts();
-
         db = db.getAppDatabase(getApplicationContext());
-        PostRoom dan = null;
-        dan.setName("putita");
-        db.PostDAO().insert(dan);
         Log.w("mitag","1");
-       /* try {
+        try {
             List<PostRoom> posts = db.PostDAO().getPosts();
             for (PostRoom post : posts) {
                 Log.v("mitag", post.getComment());
@@ -54,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         }catch(Exception e){
             //pass
             Log.v("mitag", "1");
-        }*/
+        }
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

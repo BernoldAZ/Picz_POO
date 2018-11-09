@@ -18,7 +18,9 @@ public abstract class PostDataBase extends RoomDatabase {
 
     public static PostDataBase getAppDatabase(Context context) {
         if (INSTANCE == null) {
-            INSTANCE = Room.databaseBuilder(context.getApplicationContext(),PostDataBase.class, "database-name").fallbackToDestructiveMigration().build();
+            INSTANCE = Room.databaseBuilder(context.getApplicationContext(),PostDataBase.class, "database-name")
+                    .fallbackToDestructiveMigration().allowMainThreadQueries()
+                    .build();
         }
         return INSTANCE;
     }
