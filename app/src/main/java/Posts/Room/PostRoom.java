@@ -14,12 +14,12 @@ public class PostRoom {
 
     Long date;
 
-    //Byte[] Photo;
+    String Photo;
 
-    public PostRoom(@NonNull String name) {
-        this.name = name;
+    public PostRoom() {
+
     }
- //Hay que convertirlo a un tipo de dato primitivo
+    //Hay que convertirlo a un tipo de dato primitivo
 
     /*@NonNull
     public Date getFecha() {

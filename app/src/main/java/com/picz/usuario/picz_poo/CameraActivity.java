@@ -2,12 +2,12 @@ package com.picz.usuario.picz_poo;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 import android.util.Log;
 
@@ -20,6 +20,7 @@ import Filters.iFilterable;
 public class CameraActivity extends AppCompatActivity {
 
     ImageView imageView;
+    private Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,28 +31,27 @@ public class CameraActivity extends AppCompatActivity {
         imageView = (ImageView)findViewById(R.id.imageView);
 
         Bundle parametros = this.getIntent().getExtras();
+
         if(parametros !=null){
-            Toast toast1 = Toast.makeText(getApplicationContext(),"aplicando filtro", Toast.LENGTH_SHORT);
-            toast1.show();
+            //Toast toast1 = Toast.makeText(getApplicationContext(),"aplicando filtro", Toast.LENGTH_SHORT);
+            //toast1.show();
             Bitmap photo = parametros.getParcelable("Photo");
-            Log.w("mitag", "empiezo");
             iFilterable filtro = new BlackWhiteFilter();
             Bitmap Aplicado = filtro.makeFilter(photo);
-            Log.w("mitag", "termine");
             imageView.setImageBitmap(Aplicado);
         }
 
-
-        btnCamera.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            }
-        });
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
+    }
+
+    public void aplicarFiltro(View  view){
+
+        spinner = findViewById(R.id.myspinner);
+        int pos = spinner.getSelectedItemPosition();
     }
 
 

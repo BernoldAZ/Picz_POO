@@ -22,24 +22,6 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int PICK_IMAGE = 100;
     public PostDataBase db;
-    //Listview x;
-   /*
-    private static final String DATABASE_NAME = “movies_db”;
-    private MovieDatabase movieDatabase;
-    movieDatabase = Room.databaseBuilder(getApplicationContext(),
-    MovieDatabase.class, DATABASE_NAME)
-            .fallbackToDesctructiveMigration()
- .build();
-*//*
-   new Thread(new Runnable() {
-        @Override
-        public void run() {
-            Movies movie =new Movies();
-            movie.setMovieId( “2”);
-            movie.setMovieName(“The Prestige”);
-            movieDatabase.daoAccess () . insertOnlySingleMovie (movie);
-        }
-    }) .start();*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,15 +31,14 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         db = db.getAppDatabase(getApplicationContext());
-        Log.w("mitag","1");
         try {
             List<PostRoom> posts = db.PostDAO().getPosts();
             for (PostRoom post : posts) {
-                Log.v("mitag", post.getComment());
+                Log.w("mitag", post.getName());
             }
         }catch(Exception e){
             //pass
-            Log.v("mitag", "1");
+            Log.w("mitag", "problema for linea 35");
         }
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -103,9 +84,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Bitmap bitmap = (Bitmap)data.getExtras().get("data");
-
-
-
 
         Intent cameraActivity = new Intent(getApplicationContext(), CameraActivity.class);
         cameraActivity.putExtra("Photo", bitmap);
