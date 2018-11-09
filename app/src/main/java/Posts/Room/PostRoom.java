@@ -7,6 +7,8 @@ import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.util.Base64;
 
+import java.io.ByteArrayOutputStream;
+
 @Entity (tableName = "Post")
 public class PostRoom {
     @NonNull
@@ -15,30 +17,35 @@ public class PostRoom {
 
     String Comment;
 
-    Long date;
+    String date;
 
-    public Long getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Long date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
     public Bitmap getPhoto(){
-            try {
-                byte [] encodeByte=Base64.decode(this.Photo,Base64.DEFAULT);
-                Bitmap bitmap=BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
-                return bitmap;
-            } catch(Exception e) {
-                e.getMessage();
-                return null;
-            }
+        try {
+            byte [] encodeByte=Base64.decode(this.Photo,Base64.DEFAULT);
+            Bitmap bitmap=BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            return bitmap;
+        } catch(Exception e) {
+            e.getMessage();
+            return null;
+        }
     }
 
-    public void setPhoto(String photo) {
-        Photo = photo;
+    public void setPhoto(Bitmap bitmap){
+        ByteArrayOutputStream baos=new  ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG,100, baos);
+        byte [] b=baos.toByteArray();
+        String temp=Base64.encodeToString(b, Base64.DEFAULT);
+        this.Photo=temp;
     }
+
 
 
     public PostRoom() {

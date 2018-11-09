@@ -6,7 +6,7 @@ import android.arch.persistence.room.RoomDatabase;
 import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 
-@Database(entities = {PostRoom.class}, version = 2)/*
+@Database(entities = {PostRoom.class}, version = 3)/*
 @TypeConverters({DateTypeConverter.class})
 @Database (entities = {Movies.class}, version = 1, exportSchema = false)*/
 public abstract class PostDataBase extends RoomDatabase {
