@@ -46,8 +46,6 @@ public class PostRoom {
         this.Photo=temp;
     }
 
-
-
     public PostRoom() {
 
     }
