@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.io.IOException;
@@ -37,18 +38,31 @@ public class MainActivity extends AppCompatActivity {
 
         Log.w("mitag", "problema for linea 35");
         try {
-            List<PostRoom> posts = db.PostDAO().getPosts();
+            final List<PostRoom> posts = db.PostDAO().getPosts();
             ListAdapter adapter = new ListAdapter(this, posts);
+
+
             //for (PostRoom post : posts) {
             // Attach the adapter to a ListView
                 ListView listView = (ListView) findViewById(R.id.ListaPosts);
-                listView.setAdapter(adapter);
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Intent PostEspecifico = new Intent(getApplicationContext(), PostEspecifico.class);
+                    PostEspecifico.putExtra("comment", posts.get(position).getComment());
+                    PostEspecifico.putExtra("date", posts.get(position).getDate());
+                    PostEspecifico.putExtra("image", posts.get(position).getPhoto());
+                    startActivity(PostEspecifico);
+                }
+            });
+
+            listView.setAdapter(adapter);
                /* pantalla =findViewById(R.id.pantalla);
                 pantalla.add*/
             //}
         }catch(Exception e){
             //pass
-            Log.w("mitag", "problema for linea 35");
+            Log.w("mitag", "problema for linea 61");
         }
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

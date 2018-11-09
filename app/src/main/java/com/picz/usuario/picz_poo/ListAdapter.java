@@ -30,9 +30,11 @@ public class ListAdapter extends ArrayAdapter<PostRoom> {
             // Lookup view for data population
             ImageView image = (ImageView) convertView.findViewById(R.id.image);
             TextView descripcion = (TextView) convertView.findViewById(R.id.itemName);
+            TextView hora = (TextView) convertView.findViewById(R.id.hora);
             // Populate the data into the template view using the data object
             image.setImageBitmap(post.getPhoto());
             descripcion.setText(post.getComment());
+            hora.setText(post.getDate());
             // Return the completed view to render on screen
             return convertView;
         }
