@@ -3,7 +3,9 @@ package com.picz.usuario.picz_poo;
 import android.app.ListActivity;
 import android.arch.persistence.room.Room;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -109,15 +111,36 @@ public class MainActivity extends AppCompatActivity {
         if (resultCode == this.RESULT_CANCELED){
             return;
         }
-        Bitmap bitmap = (Bitmap)data.getExtras().get("data");
+        if (requestCode == PICK_IMAGE ){
+            Uri selectedImage = data.getData();
 
-        Intent cameraActivity = new Intent(getApplicationContext(), CameraActivity.class);
-        cameraActivity.putExtra("Photo", bitmap);
-        startActivity(cameraActivity);
+            String[] projection = {MediaStore.Images.Media.DATA};
+
+            Cursor cursor = getContentResolver().query(selectedImage, projection, null, null, null);
+            cursor.moveToFirst();
+
+            int columnIndex = cursor.getColumnIndex(projection[0]);
+            String filepath = cursor.getString(columnIndex);
+            cursor.close();
+
+            Bitmap bitmap = BitmapFactory.decodeFile(filepath);
+
+            Intent cameraActivity = new Intent(getApplicationContext(), CameraActivity.class);
+            cameraActivity.putExtra("Photo", bitmap);
+            startActivity(cameraActivity);
+
+        }
+        else{
+            Bitmap bitmap = (Bitmap)data.getExtras().get("data");
+
+            Intent cameraActivity = new Intent(getApplicationContext(), CameraActivity.class);
+            cameraActivity.putExtra("Photo", bitmap);
+            startActivity(cameraActivity);
+        }
     }
 
     private void openGallery(){
-        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(gallery, PICK_IMAGE);
     }
 
