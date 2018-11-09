@@ -34,6 +34,9 @@
         <activity
             android:name=".CreatePostActivity"
             android:label="@string/title_activity_create_post"></activity>
+        <activity
+            android:name=".PostEspecifico"
+            android:label="abre un post en especifico"></activity>
     </application>
 
 </manifest>
