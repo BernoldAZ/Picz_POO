@@ -6,22 +6,19 @@ import android.arch.persistence.room.RoomDatabase;
 import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 
-@Database(entities = {PostRoom.class}, version = 1)
+@Database(entities = {PostRoom.class}, version = 1, exportSchema = false)/*
 @TypeConverters({DateTypeConverter.class})
+@Database (entities = {Movies.class}, version = 1, exportSchema = false)*/
 public abstract class PostDataBase extends RoomDatabase {
 
-
     private static PostDataBase INSTANCE;
+
 
     public abstract PostDAO PostDAO();
 
     public static PostDataBase getAppDatabase(Context context) {
         if (INSTANCE == null) {
-            INSTANCE = Room.databaseBuilder(context.getApplicationContext(), PostDataBase.class, "user-database")
-                            // allow queries on the main thread.
-                            // Don't do this on a real app! See PersistenceBasicSample for an example.
-                            .allowMainThreadQueries()
-                            .build();
+            INSTANCE = Room.databaseBuilder(context.getApplicationContext(),PostDataBase.class, "database-name").fallbackToDestructiveMigration().build();
         }
         return INSTANCE;
     }
