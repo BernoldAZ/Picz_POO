@@ -1,5 +1,6 @@
 package com.picz.usuario.picz_poo;
 
+import android.app.ListActivity;
 import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 
 import java.util.List;
 
@@ -22,42 +24,29 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int PICK_IMAGE = 100;
     public PostDataBase db;
-    //Listview x;
-   /*
-    private static final String DATABASE_NAME = “movies_db”;
-    private MovieDatabase movieDatabase;
-    movieDatabase = Room.databaseBuilder(getApplicationContext(),
-    MovieDatabase.class, DATABASE_NAME)
-            .fallbackToDesctructiveMigration()
- .build();
-*//*
-   new Thread(new Runnable() {
-        @Override
-        public void run() {
-            Movies movie =new Movies();
-            movie.setMovieId( “2”);
-            movie.setMovieName(“The Prestige”);
-            movieDatabase.daoAccess () . insertOnlySingleMovie (movie);
-        }
-    }) .start();*/
+   // private View pantalla;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         db = db.getAppDatabase(getApplicationContext());
-        Log.w("mitag","1");
+
+        Log.w("mitag", "problema for linea 35");
         try {
             List<PostRoom> posts = db.PostDAO().getPosts();
-            for (PostRoom post : posts) {
-                Log.v("mitag", post.getComment());
-            }
+            ListAdapter adapter = new ListAdapter(this, posts);
+            //for (PostRoom post : posts) {
+            // Attach the adapter to a ListView
+                ListView listView = (ListView) findViewById(R.id.ListaPosts);
+                listView.setAdapter(adapter);
+               /* pantalla =findViewById(R.id.pantalla);
+                pantalla.add*/
+            //}
         }catch(Exception e){
             //pass
-            Log.v("mitag", "1");
+            Log.w("mitag", "problema for linea 35");
         }
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -101,10 +90,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == this.RESULT_CANCELED){
+            return;
+        }
         Bitmap bitmap = (Bitmap)data.getExtras().get("data");
-
-
-
 
         Intent cameraActivity = new Intent(getApplicationContext(), CameraActivity.class);
         cameraActivity.putExtra("Photo", bitmap);

@@ -1,4 +1,9 @@
 <resources>
+    <string-array name="filtros">
+        <item>
+            gausiano
+        </item>
+    </string-array>
     <string name="app_name">Picz_POO</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_camera">CameraActivity</string>

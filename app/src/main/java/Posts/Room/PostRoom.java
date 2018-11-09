@@ -2,43 +2,51 @@ package Posts.Room;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
+import android.util.Base64;
 
 @Entity (tableName = "Post")
 public class PostRoom {
     @NonNull
     @PrimaryKey
-    String name;
+    String Photo;
 
     String Comment;
 
     Long date;
 
-    //Byte[] Photo;
-
-    public PostRoom(@NonNull String name) {
-        this.name = name;
+    public Long getDate() {
+        return date;
     }
- //Hay que convertirlo a un tipo de dato primitivo
 
-    /*@NonNull
-    public Date getFecha() {
-        return fecha;
-    }*/
+    public void setDate(Long date) {
+        this.date = date;
+    }
+
+    public Bitmap getPhoto(){
+            try {
+                byte [] encodeByte=Base64.decode(this.Photo,Base64.DEFAULT);
+                Bitmap bitmap=BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+                return bitmap;
+            } catch(Exception e) {
+                e.getMessage();
+                return null;
+            }
+    }
+
+    public void setPhoto(String photo) {
+        Photo = photo;
+    }
+
+
+    public PostRoom() {
+
+    }
 
     public void setComment(String comment) {
         Comment = comment;
-    }
-
-    @NonNull
-    public String getName() {
-
-        return name;
-    }
-
-    public void setName(@NonNull String name) {
-
-        this.name = name;
     }
 
     public String getComment() {

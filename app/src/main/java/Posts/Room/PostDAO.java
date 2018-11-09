@@ -3,6 +3,7 @@ package Posts.Room;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
+import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
@@ -12,7 +13,7 @@ import java.util.List;
 public interface PostDAO {
 
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     public void insert(PostRoom pPost);
 
     @Update
@@ -23,4 +24,5 @@ public interface PostDAO {
 
     @Query( "SELECT * FROM Post")
     public List<PostRoom> getPosts();
+
 }

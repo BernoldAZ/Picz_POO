@@ -15,6 +15,7 @@ public class bitMapConverter {
         String temp=Base64.encodeToString(b, Base64.DEFAULT);
         return temp;
     }
+
     public Bitmap toBitMap(String encodedString){
         try {
             byte [] encodeByte=Base64.decode(encodedString,Base64.DEFAULT);
