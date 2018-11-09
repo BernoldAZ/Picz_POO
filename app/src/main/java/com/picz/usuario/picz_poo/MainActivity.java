@@ -3,6 +3,7 @@ package com.picz.usuario.picz_poo;
 import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.io.IOException;
 import java.util.List;
 
 import Posts.Room.PostDataBase;
@@ -101,10 +103,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == this.RESULT_CANCELED) {
+            return;
+        }
         Bitmap bitmap = (Bitmap)data.getExtras().get("data");
-
-
-
 
         Intent cameraActivity = new Intent(getApplicationContext(), CameraActivity.class);
         cameraActivity.putExtra("Photo", bitmap);

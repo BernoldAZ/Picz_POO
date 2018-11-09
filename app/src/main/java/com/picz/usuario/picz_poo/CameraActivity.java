@@ -2,7 +2,10 @@ package com.picz.usuario.picz_poo;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.provider.MediaStore;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -27,6 +30,14 @@ public class CameraActivity extends AppCompatActivity {
         Button btnfilter3 = (Button)findViewById(R.id.btnFilter3);
         Button btnfilter4 = (Button)findViewById(R.id.btnFilter4);
         imageView = (ImageView)findViewById(R.id.imageView);
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToPost();
+            }
+        });
 
         Bundle parametros = this.getIntent().getExtras();
         if(parametros !=null){
@@ -67,6 +78,7 @@ public class CameraActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
+
     }
 
     private void makeFilter(int posFilter){
@@ -82,6 +94,17 @@ public class CameraActivity extends AppCompatActivity {
             Bitmap Aplicado = filtro.makeFilter(photo);
             imageView.setImageBitmap(Aplicado);
         }
+
+    }
+
+    private void goToPost(){
+        Drawable drawable =  imageView.getDrawable();
+        BitmapDrawable bitmapDrawable = ((BitmapDrawable) drawable);
+        Bitmap bitmap = bitmapDrawable .getBitmap();
+
+        Intent PostActivity = new Intent(getApplicationContext(), CreatePostActivity.class);
+        PostActivity.putExtra("Photo", bitmap);
+        startActivity(PostActivity);
 
     }
 
