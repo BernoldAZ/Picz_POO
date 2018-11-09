@@ -4,12 +4,12 @@ import android.graphics.Bitmap;
 
 
 public class BlackWhiteFilter implements iFilterable {
+    double intensidad=1;
 
     public Bitmap makeFilter(Bitmap photo){
         photo = photo.copy( Bitmap.Config.ARGB_8888 , true);
         int vertical = photo.getHeight();
         int horizontal = photo.getWidth();
-        double intensidad=1;
         int rojo,pixel,verde,azul,suma,gris;
 
         for (int contadorY = 0; contadorY < vertical; contadorY++)
@@ -46,6 +46,7 @@ public class BlackWhiteFilter implements iFilterable {
 
     @Override
     public double[][] createKernel(double sigma) {
+        intensidad = sigma*5;
         return null;
     }
 }

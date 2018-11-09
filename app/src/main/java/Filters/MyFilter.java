@@ -17,12 +17,12 @@ public class MyFilter implements iFilterable {
 
 
                 int pixel = photo.getPixel(contadorX,contadorY);
-                int azul = pixel & 0x000000FF;
+                int azul = pixel & 0x000000FF ;
                 int verde = pixel & 0x0000FF00 >> 8;
                 int rojo = pixel & 0x00FF0000 >> 32;
-                int alfa = pixel & 0xFF000000 >> 128;
+                int alfa = pixel & 0xFF000000 >> 64;
 
-                int cambiada = (alfa << 128 | (rojo << 32) | (verde << 8)) | azul;
+                int cambiada = (alfa << 64 | (rojo << 32) | (verde << 8)) | azul;
 
                 photo.setPixel(contadorX,contadorY,cambiada);
             }
