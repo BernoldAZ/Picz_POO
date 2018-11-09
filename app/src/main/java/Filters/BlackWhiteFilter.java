@@ -18,6 +18,7 @@ public class BlackWhiteFilter implements iFilterable {
             //mi metodo
 
                 pixel = photo.getPixel(contadorX, contadorY);
+
                 azul = pixel & 0x000000FF;
                 verde = pixel & 0x0000FF00 >> 8;
                 rojo = pixel & 0x00FF0000 >> 16;

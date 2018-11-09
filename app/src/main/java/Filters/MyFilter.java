@@ -47,9 +47,7 @@ public class MyFilter implements iFilterable {
 
         for (int fila = 0 ; fila < 3 ; fila++){ //Le asigna un resultado de aplicar la formula a cada posición de la matriz
             for (int columna = 0; columna < 3 ; columna++){
-                double valorActual =   (-1 / (Math.PI * Math.pow(sigma,4)) )*
-                        (1 - (Math.pow((fila-1),2) + Math.pow((columna-1),2)) /(2 * Math.pow(sigma,2) ) )*
-                        Math.exp( -  (Math.pow((fila-1),2) + Math.pow((columna-1),2)) /(2 * Math.pow(sigma,2) ) ); //Esto seria lo que cambia
+                double valorActual =  sigma / (Math.exp(Math.pow((fila-1),2)) + Math.exp(Math.pow((columna-1),2))); //Esto seria lo que cambia
                 kernel[fila][columna] = valorActual;
                 sumaKernel = sumaKernel + valorActual;
             }
