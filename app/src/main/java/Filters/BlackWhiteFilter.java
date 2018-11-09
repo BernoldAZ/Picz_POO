@@ -43,4 +43,9 @@ public class BlackWhiteFilter implements iFilterable {
             return photo;
 
     }
+
+    @Override
+    public double[][] createKernel(double sigma) {
+        return null;
+    }
 }

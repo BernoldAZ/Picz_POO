@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.Toast;
 
 import Filters.FilterFactory;
@@ -19,6 +20,8 @@ import Filters.iFilterable;
 public class CameraActivity extends AppCompatActivity {
 
     ImageView imageView;
+    SeekBar simpleSeekBar;
+    double sigma = 0.1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +76,30 @@ public class CameraActivity extends AppCompatActivity {
                 makeFilter(3);
             }
         });
+
+        simpleSeekBar=(SeekBar)findViewById(R.id.seekBar2);
+        // perform seek bar change listener event used for getting the progress value
+        simpleSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            int progressChangedValue = 0;
+
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                progressChangedValue = progress;
+                if (progress == 0){
+                    sigma = 1;
+                }
+                else sigma = progress;
+            }
+
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                // TODO Auto-generated method stub
+            }
+
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                Toast.makeText(getApplicationContext(), "Seek bar progress is :" + progressChangedValue,
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     @Override
@@ -91,6 +118,7 @@ public class CameraActivity extends AppCompatActivity {
             Bitmap photo = parametros.getParcelable("Photo");
             FilterFactory factory = new FilterFactory();
             iFilterable filtro = factory.getFilter(posFilter);
+            filtro.createKernel(sigma/100);
             Bitmap Aplicado = filtro.makeFilter(photo);
             imageView.setImageBitmap(Aplicado);
         }

@@ -76,6 +76,7 @@ public class CreatePostActivity extends AppCompatActivity  {
                 String Comment = mEmailView.getText().toString();//Es el comentario
 
                 Date currentTime = Calendar.getInstance().getTime();//Es la fecha, no se como la da
+
                 //Aqui se crearia el post y se guardaria en la base de datos
             }
         });

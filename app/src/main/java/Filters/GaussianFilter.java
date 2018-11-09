@@ -3,6 +3,7 @@ package Filters;
 import android.graphics.Bitmap;
 
 public class GaussianFilter implements iFilterable{
+    double[][] kernel = new double[3][3];
 
 
     public Bitmap makeFilter(Bitmap photo) {
@@ -10,8 +11,6 @@ public class GaussianFilter implements iFilterable{
 
         int vertical = photo.getHeight();
         int horizontal = photo.getWidth();
-
-        double[][] kernel = crearKernel(0.2); //Aqui se declara el valor del sigma
 
         for (int contadorY = 1; contadorY < vertical-1; contadorY++){ //Se usa 1 para no utilizar los bordes
             for (int contadorX = 1; contadorX < horizontal-1; contadorX++) {
@@ -29,7 +28,6 @@ public class GaussianFilter implements iFilterable{
                 }
 
                 int newPixel = convolution(photoCompare, kernel);
-                //newPixel = obtenerPixel(newPixel);
                 photoReturn.setPixel(contadorX,contadorY, newPixel);
 
             }
@@ -38,9 +36,8 @@ public class GaussianFilter implements iFilterable{
         return photoReturn;
     }
 
-    private double[][] crearKernel(double sigma){ //Esto nos crea el kernel
+    public double[][] createKernel(double sigma){ //Esto nos crea el kernel
 
-        double[][] kernel = new double[3][3];
 
         double sumaKernel = 0;
 
@@ -70,16 +67,5 @@ public class GaussianFilter implements iFilterable{
             }
         }
         return (int) result;
-    }
-
-    private int obtenerPixel(int pixel){
-        int azul = pixel & 0x000000FF;
-        int verde = pixel & 0x0000FF00 >> 8;
-        int rojo = pixel & 0x00FF0000 >> 32;
-        int alfa = pixel & 0xFF000000 >> 128;
-
-        int cambiada = (alfa << 128 | (rojo << 32) | (verde << 8)) | azul;
-
-        return cambiada;
     }
 }

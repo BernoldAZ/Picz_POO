@@ -3,7 +3,7 @@ package Filters;
 import android.graphics.Bitmap;
 
 public class SharpFilter implements iFilterable {
-
+    double[][] kernel = new double[3][3];
 
     public Bitmap makeFilter(Bitmap photo) {
         Bitmap photoReturn = photo.copy( Bitmap.Config.ARGB_8888 , true);
@@ -11,7 +11,6 @@ public class SharpFilter implements iFilterable {
         int vertical = photo.getHeight();
         int horizontal = photo.getWidth();
 
-        double[][] kernel = crearKernel(0.19); //Aqui se declara el valor del sigma
 
         for (int contadorY = 1; contadorY < vertical-1; contadorY++){ //Se usa 1 para no utilizar los bordes
             for (int contadorX = 1; contadorX < horizontal-1; contadorX++) {
@@ -39,9 +38,7 @@ public class SharpFilter implements iFilterable {
         return photoReturn;
     }
 
-    private double[][] crearKernel(double sigma){ //Esto nos crea el kernel
-
-        double[][] kernel = new double[3][3];
+    public double[][] createKernel(double sigma){ //Esto nos crea el kernel
 
         double sumaKernel = 0;
 
