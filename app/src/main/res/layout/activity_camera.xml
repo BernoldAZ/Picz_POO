@@ -50,6 +50,7 @@
         android:background="@android:color/holo_red_dark"
         android:text="My filter"
         android:textColor="@android:color/white"
+<<<<<<< HEAD
         tools:ignore="HardcodedText" />
 
     <Button
@@ -80,3 +81,15 @@
 
 
 </RelativeLayout>
+=======
+        android:text="@string/open_gallery"
+        />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="368dp"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="424dp" />
+</android.support.constraint.ConstraintLayout>
+>>>>>>> 87f49b82a04f8acc5415bdeb7055306849d2faef
