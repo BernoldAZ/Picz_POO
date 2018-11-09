@@ -39,6 +39,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import Posts.Room.PostDataBase;
+import Posts.Room.PostRoom;
+
 import static android.Manifest.permission.READ_CONTACTS;
 
 
@@ -47,6 +50,8 @@ public class CreatePostActivity extends AppCompatActivity  {
     // UI references.
     private AutoCompleteTextView mEmailView;
     ImageView imageView;
+
+    public PostDataBase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,26 +68,29 @@ public class CreatePostActivity extends AppCompatActivity  {
             imageView.setImageBitmap(photo);
         }
 
-
         Button mEmailSignInButton = (Button) findViewById(R.id.btnComment);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                db = db.getAppDatabase(getApplicationContext());
                 Drawable drawable =  imageView.getDrawable();
                 BitmapDrawable bitmapDrawable = ((BitmapDrawable) drawable);
                 Bitmap photo = bitmapDrawable .getBitmap();//Es la foto
-
                 String Comment = mEmailView.getText().toString();//Es el comentario
+                Date currentTime = Calendar.getInstance().getTime();
 
-                Date currentTime = Calendar.getInstance().getTime();//Es la fecha, no se como la da
+                PostRoom post = new PostRoom();
+                post.setComment(Comment);
+                post.setPhoto(photo);
+                post.setDate(currentTime.toString());
+                db.PostDAO().insert(post);
+                Intent MainActivity = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(MainActivity);
+                //Es la fecha, no se como la da
                 //Aqui se crearia el post y se guardaria en la base de datos
             }
         });
-
-
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
